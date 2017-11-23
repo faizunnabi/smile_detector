@@ -1,2 +1,2 @@
 # Smile Detector
-Detects the smiling face nd shows the laughing level.
+Detects the smiling face and shows the laughing level.
