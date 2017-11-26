@@ -1,9 +1,11 @@
 import cv2
-
+import pandas as pd
+from _datetime import datetime
 
 face_classifier = cv2.CascadeClassifier('haarcascade_frontface.xml');
 smile_classifier = cv2.CascadeClassifier('haarcascade_smile.xml');
-
+times=[]
+smile_ratios=[]
 cap = cv2.VideoCapture(0)
 
 while 1:
@@ -22,10 +24,16 @@ while 1:
             sm_ratio = str(round(sw / sx, 3))
             font = cv2.FONT_HERSHEY_SIMPLEX
             cv2.putText(img, 'Smile meter : ' + sm_ratio, (10, 50), font, 1, (200, 255, 155), 2, cv2.LINE_AA)
+            if float(sm_ratio)>1.8:
+                smile_ratios.append(float(sm_ratio))
+                times.append(datetime.now())
     cv2.imshow('Smile Detector', img)
     k = cv2.waitKey(30) & 0xff
     if k == 27:
         break
 
+ds={'smile_ratio':smile_ratios,'times':times}
+df=pd.DataFrame(ds)
+df.to_csv('smile_records.csv')
 cap.release()
 cv2.destroyAllWindows()
