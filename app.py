@@ -22,7 +22,7 @@ while 1:
                                                   minSize=(25, 25))
         for (sx, sy, sw, sh) in smile:
             cv2.rectangle(roi_img, (sx, sy), (sx + sw, sy + sh), (0, 255, 0), 1)
-            sm_ratio = str(round(sw / sx, 3))
+            sm_ratio = str(round(sw / sh, 3))
             font = cv2.FONT_HERSHEY_SIMPLEX
             cv2.putText(img, 'Smile meter : ' + sm_ratio, (10, 50), font, 1, (200, 255, 155), 2, cv2.LINE_AA)
             if float(sm_ratio)>1.8:
