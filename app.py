@@ -2,10 +2,12 @@ import cv2
 import pandas as pd
 from _datetime import datetime
 
+#load the cascade
 face_classifier = cv2.CascadeClassifier('haarcascade_frontface.xml');
 smile_classifier = cv2.CascadeClassifier('haarcascade_smile.xml');
 times=[]
 smile_ratios=[]
+#read the image from the video
 cap = cv2.VideoCapture(0)
 
 while 1:
